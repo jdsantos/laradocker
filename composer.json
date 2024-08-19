@@ -1,0 +1,61 @@
+{
+    "name": "jdsantos/laradocker",
+    "description": "A Laravel package to seamlessly integrate Docker into your application",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Jorge Santos",
+            "email": "jorgedmsantos@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "license": "MIT",
+    "require": {
+        "laravel/framework": "^11.9",
+        "php": ">=8.2"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^9.3",
+        "laravel/pint": "^1.17",
+        "larastan/larastan": "^2.9"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Jdsantos\\src\\Providers\\LaradockerServiceProvider"
+            ]
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Jdsantos\\Laradocker\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "App\\": "vendor/orchestra/testbench-core/laravel/app/",
+            "Jdsantos\\Laradocker\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "lint": "pint -v",
+        "test:lint": "pint --test -v",
+        "test:types": "phpstan analyse --ansi src/ tests/",
+        "test:phpunit": [
+            "@putenv XDEBUG_MODE=coverage",
+            "phpunit --colors=always --coverage-text --coverage-filter src/ tests/"
+        ],
+        "test": [
+            "@test:lint",
+            "@test:types",
+            "@test:phpunit"
+        ]
+    },
+    "scripts-descriptions": {
+        "lint": "Fix code using the pint linter from Laravel (this might CHANGE files!)",
+        "test:lint": "Runs the pint linter to check source files for issues",
+        "test:types": "Runs PHPStan to check for type safety issues",
+        "test:phpunit": "Runs PHPUnit tests",
+        "test": "Runs all :lint :types and :phpunit commands"
+    }
+}

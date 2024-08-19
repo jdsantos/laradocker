@@ -22,7 +22,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Jdsantos\\src\\Providers\\LaradockerServiceProvider"
+                "Jdsantos\\\Laradocker\Providers\\LaradockerServiceProvider"
             ]
         }
     },

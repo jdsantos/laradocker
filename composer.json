@@ -1,6 +1,8 @@
 {
     "name": "jdsantos/laradocker",
     "description": "A Laravel package to seamlessly integrate Docker into your application",
+    "keywords": ["console", "command-line", "php", "cli", "laravel", "artisan", "docker"],
+    "license": "MIT",
     "type": "library",
     "authors": [
         {
@@ -8,8 +10,12 @@
             "email": "jorgedmsantos@gmail.com"
         }
     ],
+    "support": {
+        "issues": "https://github.com/jdsantos/laradocker/issues",
+        "source": "https://github.com/jdsantos/laradocker"
+    },
     "minimum-stability": "stable",
-    "license": "MIT",
+    "prefer-stable": true,
     "require": {
         "laravel/framework": "^11.9",
         "php": ">=8.2"
@@ -41,14 +47,19 @@
         "lint": "pint -v",
         "test:lint": "pint --test -v",
         "test:types": "phpstan analyse --ansi src/ tests/",
-        "test:phpunit": [
+        "test:unit": [
+            "@putenv XDEBUG_MODE=coverage",
+            "phpunit --colors=always src/ tests/"
+        ],
+        "test:coverage": [
             "@putenv XDEBUG_MODE=coverage",
             "phpunit --colors=always --coverage-text --coverage-filter src/ tests/"
         ],
         "test": [
             "@test:lint",
             "@test:types",
-            "@test:phpunit"
+            "@test:unit",
+            "@test:coverage"
         ]
     },
     "scripts-descriptions": {

@@ -66,7 +66,8 @@
         "lint": "Fix code using the pint linter from Laravel (this might CHANGE files!)",
         "test:lint": "Runs the pint linter to check source files for issues",
         "test:types": "Runs PHPStan to check for type safety issues",
-        "test:phpunit": "Runs PHPUnit tests",
+        "test:unit": "Runs PHPUnit tests",
+        "test:coverage": "Runs PHPUnit tests with code coverage report",
         "test": "Runs all :lint :types and :phpunit commands"
     }
 }

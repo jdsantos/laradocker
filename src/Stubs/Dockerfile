@@ -1,5 +1,7 @@
 FROM php:8.3-fpm-alpine
 
+LABEL org.opencontainers.image.authors="https://jdsantos.github.io"
+
 # Set working directory
 WORKDIR /opt/laravel
 
@@ -32,17 +34,25 @@ COPY . /opt/laravel
 RUN chown -R www-data:www-data /opt/laravel \
     && chmod -R 755 /opt/laravel/storage
 
-# Scheduler setup
+# ::: Scheduler setup ::: 
 
 # Create a log file
 RUN touch /var/log/cron.log
 
 # Add cron job directly to crontab
 RUN echo "* * * * * /usr/local/bin/php /opt/laravel/artisan schedule:run >> /var/log/cron.log 2>&1" | crontab -
+    
+# ::: --- ::: 
+
 
 # Expose ports
 EXPOSE 80
 
+# Declare image volumes
+VOLUME /opt/laravel/storage
+
+# Add up the entrypoint
 ADD entrypoint.sh /root/entrypoint.sh
 
+# ... and declare it as the entrypoint
 ENTRYPOINT ["/root/entrypoint.sh"]

@@ -28,7 +28,7 @@ class LaradockerServiceProvider extends ServiceProvider
 
                 return [
                     'Version' => '1.0.3',
-                    'Install status' => File::exists("$currentProjectPath/Dockerfile"),
+                    'Status' => File::exists("$currentProjectPath/Dockerfile") ? '<options=bold;fg=green>INSTALLED</>' : '<options=bold;fg=red>NOT INSTALLED</>',
                 ];
             });
         }

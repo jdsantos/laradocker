@@ -2,6 +2,9 @@ FROM php:8.3-fpm-alpine
 
 LABEL org.opencontainers.image.authors="https://jdsantos.github.io"
 
+# Set production to true
+ENV PRODUCTION=1 
+
 # Set working directory
 WORKDIR /opt/laravel
 

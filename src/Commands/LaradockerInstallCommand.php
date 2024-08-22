@@ -50,6 +50,13 @@ class LaradockerInstallCommand extends Command
         // copy configuration files directory for nginx, php, pfp-fpm, supervisor, opcache
         File::copyDirectory("$stubsBasePath/conf.d", "$projectBasePath/conf.d");
 
-        $this->info('installed successfully.');
+        $this->line('');
+        $this->line('<options=bold;fg=green>Installed successfully.</>');
+        $this->line('');
+        $this->line('<fg=white>Now you can run your app on docker using one of the following commands:</>');
+        $this->line('');
+        $this->line('<options=bold> • docker run -p 80:80 --rm -it $(docker build -q .)</>');
+        $this->line('<options=bold> • docker build -t foo . && docker run -p 80:80 -it foo</>');
+        $this->line('');
     }
 }

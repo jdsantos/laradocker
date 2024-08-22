@@ -50,6 +50,6 @@ class LaradockerUninstallCommand extends Command
             }
         }
 
-        $this->info('uninstalled successfully.');
+        $this->info('<options=bold;fg=green>Uninstalled successfully.</>');
     }
 }

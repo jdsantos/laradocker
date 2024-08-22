@@ -6,6 +6,7 @@ use Illuminate\Foundation\Console\AboutCommand;
 use Illuminate\Support\ServiceProvider;
 use Jdsantos\Laradocker\Commands\LaradockerInstallCommand;
 use Jdsantos\Laradocker\Commands\LaradockerUninstallCommand;
+use Illuminate\Support\Facades\File;
 
 class LaradockerServiceProvider extends ServiceProvider
 {
@@ -22,7 +23,13 @@ class LaradockerServiceProvider extends ServiceProvider
                 LaradockerUninstallCommand::class,
             ]);
 
-            AboutCommand::add('Laradocker', fn () => ['Version' => '1.0.0']);
+            AboutCommand::add('Laradocker', function () {
+                $currentProjectPath = $this->app->basePath();
+                return [
+                    'Version'           => '1.0.3',
+                    'Install status'    => File::exists("$currentProjectPath/Dockerfile"),
+                ];
+            });
         }
     }
 

@@ -32,7 +32,7 @@ class LaradockerUninstallCommand extends Command
     }
 
     /**
-     * Copies stubs from the 'Stubs' folder to the current project's root location
+     * Deletes any created files by this app
      */
     private function deleteExistingConfigurations(): void
     {
@@ -50,6 +50,6 @@ class LaradockerUninstallCommand extends Command
             }
         }
 
-        $this->info('<options=bold;fg=green>Uninstalled successfully.</>');
+        $this->line('<options=bold;fg=green>Uninstalled successfully.</>');
     }
 }

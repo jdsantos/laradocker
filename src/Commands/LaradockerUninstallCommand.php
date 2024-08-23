@@ -40,6 +40,9 @@ class LaradockerUninstallCommand extends Command
 
         $filesToDelete = ["$projectBasePath/conf.d", "$projectBasePath/Dockerfile", "$projectBasePath/.dockerignore", "$projectBasePath/entrypoint.sh"];
 
+        $this->line('');
+        $this->line('The following files will be deleted:');
+        $this->line('');
         foreach ($filesToDelete as $fileToDelete) {
             if (File::exists($fileToDelete)) {
                 if (File::isDirectory($fileToDelete)) {
@@ -48,8 +51,9 @@ class LaradockerUninstallCommand extends Command
                     File::delete($fileToDelete);
                 }
             }
+            $this->line("<options=bold;fg=red> • $fileToDelete</>");
         }
-
-        $this->info('<options=bold;fg=green>Uninstalled successfully.</>');
+        $this->line('');
+        $this->line('<options=bold;fg=green>Uninstalled successfully.</>');
     }
 }

@@ -55,8 +55,8 @@ class LaradockerInstallCommand extends Command
         $this->line('');
         $this->line('<fg=white>Now you can run your app on docker using one of the following commands:</>');
         $this->line('');
-        $this->line('<options=bold> • docker run -p 80:80 --rm -it $(docker build -q .)</>');
-        $this->line('<options=bold> • docker build -t foo . && docker run -p 80:80 -it foo</>');
+        $this->line('<options=bold> • docker run -p 80:80 -v laravel_storage:/opt/laravel/storage --rm -it $(docker build -q .)</>');
+        $this->line('<options=bold> • docker build -t foo . && docker run -p 80:80 -v laravel_storage:/opt/laravel/storage -it foo</>');
         $this->line('');
     }
 }

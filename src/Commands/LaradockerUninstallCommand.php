@@ -32,7 +32,7 @@ class LaradockerUninstallCommand extends Command
     }
 
     /**
-     * Copies stubs from the 'Stubs' folder to the current project's root location
+     * Deletes any created files by this app
      */
     private function deleteExistingConfigurations(): void
     {

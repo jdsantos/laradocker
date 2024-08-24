@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/jdsantos/laradocker/main/docs/logo.png" height="300" alt="Laradocker logo">
+  <img src="https://raw.githubusercontent.com/jdsantos/laradocker/main/docs/logo.png" height="150" alt="Laradocker logo">
   <p align="center">
     <a href="https://github.com/jdsantos/laradocker/actions"><img src="https://img.shields.io/github/actions/workflow/status/jdsantos/laradocker/tests.yml?label=tests&style=round-square" alt="Build Status"></img></a>
     <a href="https://packagist.org/packages/jdsantos/laradocker"><img src="https://poser.pugx.org/jdsantos/laradocker/d/total.svg" alt="Total Downloads"></a>

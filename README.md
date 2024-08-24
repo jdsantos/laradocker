@@ -1,5 +1,3 @@
-# Laradocker
-
 <p align="center">
   <img src="https://raw.githubusercontent.com/jdsantos/laradocker/main/docs/logo.png" height="300" alt="Laradocker logo">
   <p align="center">

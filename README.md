@@ -5,6 +5,7 @@
   <p align="center">
     <a href="https://github.com/jdsantos/laradocker/actions"><img src="https://img.shields.io/github/actions/workflow/status/jdsantos/laradocker/tests.yml?label=tests&style=round-square" alt="Build Status"></img></a>
     <a href="https://packagist.org/packages/jdsantos/laradocker"><img src="https://poser.pugx.org/jdsantos/laradocker/d/total.svg" alt="Total Downloads"></a>
+    <a href="https://packagist.org/packages/jdsantos/laradocker"><img alt="Latest Version" src="https://img.shields.io/packagist/v/jdsantos/laradocker"></a>
     <a href="https://packagist.org/packages/jdsantos/laradocker"><img src="https://poser.pugx.org/jdsantos/laradocker/license.svg" alt="License"></a>
   </p>
 </p>
@@ -15,13 +16,14 @@
 
 ## Prerequisites
 
-Ensure you have PHP (8.2+), Composer and Docker installed on your machine before proceeding.
+Ensure you have PHP (8.2+), Composer and Docker installed on your machine before proceeding. This package requires also that you run it inside a Laravel 11+ project:
 
+- [Laravel 11+](https://getcomposer.org/download)
 - [Docker](https://docs.docker.com/get-docker/)
-- [PHP](https://php.net/downloads)
+- [PHP 8.2+](https://php.net/downloads)
 - [Composer](https://getcomposer.org/download)
 
-## Installation
+## 🚀 Installation
 
 Inside your Laravel project folder, simply run the following commands:
 

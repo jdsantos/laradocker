@@ -56,7 +56,7 @@ EXPOSE 80
 VOLUME /opt/laravel/storage
 
 # Define a health check
-HEALTHCHECK --interval=30s --timeout=15s --start-period=15s --retries=3 CMD curl -f http://127.0.0.1/ || exit 1
+HEALTHCHECK --interval=30s --timeout=15s --start-period=15s --retries=3 CMD curl -f http://localhost/up || exit 1
 
 # Add up the entrypoint
 ADD entrypoint.sh /root/entrypoint.sh

@@ -12,6 +12,7 @@ WORKDIR /opt/laravel
 RUN apk --no-cache add \
     nginx \
     supervisor \
+    npm \
     && docker-php-ext-enable opcache
 
 # Install composer
@@ -53,6 +54,9 @@ EXPOSE 80
 
 # Declare image volumes
 VOLUME /opt/laravel/storage
+
+# Define a health check
+HEALTHCHECK --interval=30s --timeout=15s --start-period=15s --retries=3 CMD curl -f http://127.0.0.1/ || exit 1
 
 # Add up the entrypoint
 ADD entrypoint.sh /root/entrypoint.sh

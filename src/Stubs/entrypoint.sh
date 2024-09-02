@@ -53,8 +53,9 @@ rm -rf public/storage
 php artisan storage:link
 
 # Check if a package.json file exists. If it does, install npm dependencies right away
-if [ ! -f "$BASEDIR/package.json" ]; then
+if [ -f "$BASEDIR/package.json" ]; then
    npm install
+   npm run build
 fi
 
 # Check if running in production or development mode

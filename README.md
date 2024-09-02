@@ -29,7 +29,7 @@ Inside your Laravel project folder, simply run the following commands:
 
    `composer require --dev jdsantos/laradocker`
 
-2. **Install Laradocker**: Installs the necessary files inside your project folder:
+2. **Install Laradocker**: Launch the installer and follow the steps to include all necessary files inside your project folder:
 
    `php artisan laradocker:install`
 

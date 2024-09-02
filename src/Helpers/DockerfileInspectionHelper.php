@@ -4,7 +4,7 @@ namespace Jdsantos\Laradocker\Helpers;
 
 use Illuminate\Support\Facades\File;
 
-class DockerFileInspectionHelper
+class DockerfileInspectionHelper
 {
     private function __construct(private string $path) {}
 

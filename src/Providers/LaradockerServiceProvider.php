@@ -11,7 +11,7 @@ use Jdsantos\Laradocker\Contracts\StubConfigurator;
 use Jdsantos\Laradocker\Contracts\StubProcessor;
 use Jdsantos\Laradocker\Handlers\ConcreteStubConfigurator;
 use Jdsantos\Laradocker\Handlers\ConcreteStubProcessor;
-use Jdsantos\Laradocker\Helpers\DockerFileInspectionHelper;
+use Jdsantos\Laradocker\Helpers\DockerfileInspectionHelper;
 
 class LaradockerServiceProvider extends ServiceProvider
 {
@@ -37,7 +37,7 @@ class LaradockerServiceProvider extends ServiceProvider
             AboutCommand::add('Laradocker', function () {
                 $currentProjectPath = $this->app->basePath();
                 $dockerfilePath = "$currentProjectPath/Dockerfile";
-                $inspection = DockerFileInspectionHelper::fromPath($dockerfilePath)->inspect();
+                $inspection = DockerfileInspectionHelper::fromPath($dockerfilePath)->inspect();
 
                 return $inspection;
             });

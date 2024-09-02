@@ -51,8 +51,6 @@ PostgreSQL        | 10.0+     |  ✅
 SQLServer         | -         | ❌
 
 
----
-
 ### Contributing
 
 Any contributions to this project are more than welcome. Feel free to reach us and we will gladly include any improvements or ideas that you may have.

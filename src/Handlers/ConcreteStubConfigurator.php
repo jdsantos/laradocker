@@ -7,9 +7,20 @@ use Jdsantos\Laradocker\Contracts\StubConfigurator;
 
 class ConcreteStubConfigurator implements StubConfigurator
 {
-    private array $databases = [];
+    /**
+     * List of all currently supported databases by this specific configurator
+     */
+    const SUPPORTED_DATABASES = [
+        'sqlite',
+        'mysql',
+        'mariadb',
+        'pgsql',
+    ];
 
-    const SUPPORTED_DATABASES = ['sqlite', 'mysql', 'mariadb', 'pgsql'];
+    /**
+     * Repository to hold all databases to support
+     */
+    private array $databases = [];
 
     public function __construct(private Application $app) {}
 

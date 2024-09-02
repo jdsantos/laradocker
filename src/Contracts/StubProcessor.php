@@ -2,6 +2,10 @@
 
 namespace Jdsantos\Laradocker\Contracts;
 
+/**
+ * The interface that allows a collection of stubs to be processed and deployed to
+ * the user's project
+ */
 interface StubProcessor
 {
     public function getStubFiles(): array;

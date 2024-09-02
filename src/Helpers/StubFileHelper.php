@@ -2,10 +2,21 @@
 
 namespace Jdsantos\Laradocker\Helpers;
 
-class StubFile
+/**
+ * Helper class to handle common stub operations
+ */
+class StubFileHelper
 {
-
-public static function replaceLineWithWordInFile($filePath, $searchWord, $replacementString)
+    /**
+     * This method replaces a specific line in a file, that
+     * contains a specific $searchWord, by a $replacementString
+     *
+     * @param  mixed  $filePath
+     * @param  mixed  $searchWord
+     * @param  mixed  $replacementString
+     * @return [type]
+     */
+    public static function replaceLineInFile($filePath, $searchWord, $replacementString)
     {
         // Read the entire file into an array of lines
         $fileContents = file($filePath);

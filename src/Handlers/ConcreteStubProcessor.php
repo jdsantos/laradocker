@@ -6,12 +6,18 @@ use Illuminate\Support\Facades\File;
 use Jdsantos\Laradocker\Contracts\StubConfigurator;
 use Jdsantos\Laradocker\Contracts\StubProcessor;
 use Jdsantos\Laradocker\Exceptions\InvalidConfiguration;
-use Jdsantos\Laradocker\Helpers\StubHelper;
+use Jdsantos\Laradocker\Helpers\StubFileHelper;
 
 class ConcreteStubProcessor implements StubProcessor
 {
+    /**
+     * The base path for the Stubs folder
+     */
     const STUBS_BASE_PATH = __DIR__.'/../Stubs';
 
+    /**
+     * The list of files to consider as a deployable stub
+     */
     const FILES_TO_CONSIDER = [
         'Dockerfile',
         '.dockerignore',
@@ -40,7 +46,6 @@ class ConcreteStubProcessor implements StubProcessor
         $databases = $this->configurator->getDatabasesToSupport();
 
         $dbStubsContent = [];
-
         foreach ($databases as $database) {
             $dbStubPath = self::STUBS_BASE_PATH."/databases/$database.stub";
             if (File::exists($dbStubPath)) {
@@ -49,15 +54,16 @@ class ConcreteStubProcessor implements StubProcessor
         }
 
         $mergedDbStubContent = implode("\n\n", $dbStubsContent);
-
-        $dockerfileContent = StubHelper::replaceLineWithWordInFile($stubPath, '{DATABASES}', $mergedDbStubContent);
-
-        file_put_contents(self::STUBS_BASE_PATH.'/Dockerfile', $dockerfileContent);
+        $dockerfileContent = StubFileHelper::replaceLineInFile($stubPath, '{DATABASES}', $mergedDbStubContent);
+        File::put(self::STUBS_BASE_PATH.'/Dockerfile', $dockerfileContent);
     }
 
+    /**
+     * Copies a file from the Stubs location to the configured installation path
+     */
     public function copy(string $file): bool
     {
-        $stubsBasePath = __DIR__.'/../Stubs';
+        $stubsBasePath = self::STUBS_BASE_PATH;
         $projectBasePath = $this->configurator->getLaravelInstallationPath();
 
         $sourcePath = "$stubsBasePath/$file";
@@ -67,10 +73,9 @@ class ConcreteStubProcessor implements StubProcessor
             return false;
         }
 
-        if (File::exists("$destPath")) {
-            if (File::isDirectory($destPath)) {
-                File::deleteDirectory($destPath);
-            }
+        // If file exists in the destiny, and happens to be a directory, remove it first
+        if (File::exists("$destPath") && File::isDirectory($destPath)) {
+            File::deleteDirectory($destPath);
         }
 
         if (File::isDirectory($sourcePath)) {
@@ -82,14 +87,21 @@ class ConcreteStubProcessor implements StubProcessor
         return false;
     }
 
+    /**
+     * Does some housekeeping by deleting generated files in the Stubs folder
+     */
     public function cleanup(): void
     {
+        // Delete the generated Dockerfile file
         $dockerfilePath = self::STUBS_BASE_PATH.'/Dockerfile';
         if (File::exists($dockerfilePath)) {
             File::delete($dockerfilePath);
         }
     }
 
+    /**
+     * Returns the list of files processed/handled by this processor
+     */
     public function getStubFiles(): array
     {
         return self::FILES_TO_CONSIDER;

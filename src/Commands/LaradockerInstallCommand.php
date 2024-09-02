@@ -23,10 +23,6 @@ class LaradockerInstallCommand extends Command
      */
     protected $description = 'Install any necessary files to prepare this app for docker deployments';
 
-    /**
-     * @param  StubProcessor
-     * @param  StubConfigurator
-     */
     public function __construct(private StubProcessor $processor, private StubConfigurator $configurator)
     {
         parent::__construct();
@@ -39,19 +35,15 @@ class LaradockerInstallCommand extends Command
      */
     public function handle()
     {
-        // Collect existing params sent by the user
         $this->collectConsoleOptionsInput();
 
-        // Greet the user
         $this->greetUser();
 
-        // prompt the user for database confirmation
         $this->confirmDatabaseChoices();
 
         $this->informUserAboutFilesToBeCreated();
 
         if ($this->confirm(question: 'Laradocker will now generate and create all necessary files inside your project. Do you wish to continue?', default: true)) {
-            // Copy the resulting stubs to the app installation directory
             $this->processAndCopyStubs();
         } else {
             $this->error('Installation canceled. No files were generated inside your project.');
@@ -59,9 +51,11 @@ class LaradockerInstallCommand extends Command
         }
     }
 
-    private function collectConsoleOptionsInput()
+    /**
+     * Collects all user input from the command parameters/options
+     */
+    private function collectConsoleOptionsInput(): void
     {
-        // Collect the database option
         $databases = $this->option('database');
 
         // wipe out empty options
@@ -72,17 +66,27 @@ class LaradockerInstallCommand extends Command
         }
     }
 
+    /**
+     * Greet the user with a nice message and guide him onwards
+     */
     private function greetUser(): void
     {
         $this->line('----------------------------------------------------------------');
         $this->newLine();
-        $this->info('👋 Welcome to the Laradocker installer!');
+        $this->info('👋 Welcome to Laradocker!');
+        $this->newLine();
+        $this->comment('The following steps will help you set up Laradocker in your project.');
         $this->newLine();
         $this->line('----------------------------------------------------------------');
         $this->newLine();
     }
 
-    private function confirmDatabaseChoices()
+    /**
+     * Confirm all database choices made and allow the user to add support for multiple databases
+     *
+     * @return [type]
+     */
+    private function confirmDatabaseChoices(): void
     {
         if ($this->confirm('Do you want your image support to (more) databases?', true)) {
             $databases = $this->choice(
@@ -93,15 +97,16 @@ class LaradockerInstallCommand extends Command
             foreach ($databases as $database) {
                 $this->configurator->addDatabaseSupportFor($database);
             }
-            // Inform the user of what is going to be inestalled
             $this->informInstallOptions();
             $this->confirmDatabaseChoices();
         } else {
-            // Inform the user of what is going to be inestalled
             $this->informInstallOptions();
         }
     }
 
+    /**
+     * Inform the user about the install options made
+     */
     private function informInstallOptions(): void
     {
         $databasesAsTableCell = implode(', ', $this->configurator->getDatabasesToSupport());
@@ -115,7 +120,12 @@ class LaradockerInstallCommand extends Command
         $this->newLine();
     }
 
-    private function informUserAboutFilesToBeCreated()
+    /**
+     * Give feedback about the files that are going to be generated in the project directory
+     *
+     * @return [type]
+     */
+    private function informUserAboutFilesToBeCreated(): void
     {
         $files = $this->processor->getStubFiles();
 
@@ -128,7 +138,7 @@ class LaradockerInstallCommand extends Command
     }
 
     /**
-     * Copies stubs from the 'Stubs' folder to the current project's root location
+     * Processes and copies necessary files to the user's project directory
      */
     private function processAndCopyStubs(): void
     {

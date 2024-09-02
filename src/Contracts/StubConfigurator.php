@@ -2,6 +2,10 @@
 
 namespace Jdsantos\Laradocker\Contracts;
 
+/**
+ * This class allows for changing and mocking the behaviour of the configurator,
+ * if we need to add more options going forward.
+ */
 interface StubConfigurator
 {
     public function getLaravelInstallationPath(): string;

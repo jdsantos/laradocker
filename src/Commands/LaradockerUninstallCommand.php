@@ -34,18 +34,8 @@ class LaradockerUninstallCommand extends Command
      */
     public function handle()
     {
-        $this->deleteExistingConfigurations();
-    }
-
-    /**
-     * Deletes any created files by this app
-     */
-    private function deleteExistingConfigurations(): void
-    {
         $projectBasePath = $this->laravel->basePath();
-
         $filesToDelete = $this->processor->getStubFiles();
-
         $filesToDelete = array_map(function ($file) use ($projectBasePath) {
             return "$projectBasePath/$file";
         }, $filesToDelete);

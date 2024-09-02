@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\File;
 use Jdsantos\Laradocker\Contracts\StubConfigurator;
 use Jdsantos\Laradocker\Contracts\StubProcessor;
 use Jdsantos\Laradocker\Exceptions\InvalidConfiguration;
+use Jdsantos\Laradocker\Helpers\StubHelper;
 
 class ConcreteStubProcessor implements StubProcessor
 {
@@ -49,7 +50,7 @@ class ConcreteStubProcessor implements StubProcessor
 
         $mergedDbStubContent = implode("\n\n", $dbStubsContent);
 
-        $dockerfileContent = $this->replaceLineWithWordInFile($stubPath, '{DATABASES}', $mergedDbStubContent);
+        $dockerfileContent = StubHelper::replaceLineWithWordInFile($stubPath, '{DATABASES}', $mergedDbStubContent);
 
         file_put_contents(self::STUBS_BASE_PATH.'/Dockerfile', $dockerfileContent);
     }
@@ -92,22 +93,5 @@ class ConcreteStubProcessor implements StubProcessor
     public function getStubFiles(): array
     {
         return self::FILES_TO_CONSIDER;
-    }
-
-    private function replaceLineWithWordInFile($filePath, $searchWord, $replacementString)
-    {
-        // Read the entire file into an array of lines
-        $fileContents = file($filePath);
-
-        // Iterate through each line
-        foreach ($fileContents as &$line) {
-            // Check if the line contains the search word
-            if (strpos($line, $searchWord) !== false) {
-                // Replace the entire line with the replacement string
-                $line = $replacementString.PHP_EOL;
-            }
-        }
-
-        return implode('', $fileContents);
     }
 }

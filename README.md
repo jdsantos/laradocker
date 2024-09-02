@@ -21,7 +21,7 @@ Ensure you have PHP (8.2+), Composer and Docker installed on your machine before
 - [PHP 8.2+](https://php.net/downloads)
 - [Composer](https://getcomposer.org/download)
 
-## 🚀 Installation
+## 🚀 Installation & Usage
 
 Inside your Laravel project folder, simply run the following commands:
 
@@ -36,3 +36,16 @@ Inside your Laravel project folder, simply run the following commands:
 3. **Try it out!**: Now you can run your Laravel app using Docker like this:
 
    `docker run -p 80:80 -v laravel_storage:/opt/laravel/storage --rm -it $(docker build -q .)`
+
+
+## 🛢 Databases support
+
+Laradocker currently supports the following databases:
+
+ Database  | Version |  Status
+:---------|:----------:|----------:
+SQLite            | 3.26.0+   |  ✅        
+Mysql             | 5.7+      |  ✅     
+MariaDB           | 10.3+     |  ✅    
+PostgreSQL        | 10.0+     |  ✅  
+SQLServer         | -         | ❌

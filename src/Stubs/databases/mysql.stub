@@ -1,0 +1,2 @@
+# Install PHP extensions for MySQL
+RUN apk --no-cache add mysql-client && docker-php-ext-install pdo pdo_mysql

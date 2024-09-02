@@ -1,0 +1,2 @@
+# Install PHP extensions for SQLite
+RUN apk --no-cache add sqlite-dev && docker-php-ext-install pdo pdo_sqlite

@@ -1,0 +1,62 @@
+services:
+  laravel:
+    build: .
+    environment:
+      PHP_OPCACHE_ENABLE: 0
+      PRODUCTION: 0
+    ports:
+      - 80:80
+    volumes:
+      - storage-data:/opt/laravel/storage
+      
+  postgresql:
+    image: postgres:latest
+    environment:
+        - POSTGRES_PASSWORD=postgres
+    volumes:
+        - postgresql-data:/var/lib/postgresql/data
+
+  mariadb:
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: mariadb
+      MYSQL_DATABASE: testdb
+      MYSQL_USER: testuser
+      MYSQL_PASSWORD: testpassword
+    volumes:
+      - mariadb-data:/var/lib/mysql
+
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql
+      MYSQL_DATABASE: testdb
+      MYSQL_USER: testuser
+      MYSQL_PASSWORD: testpassword
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:latest
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "StrongPassword123!"
+    ports:
+      - 1433:1433
+    volumes:
+      - sqlserver-data:/var/opt/mssql
+
+  redis:
+    image: redis:latest
+    ports:
+      - 6379:6379
+    volumes:
+      - redis-data:/data
+
+volumes:
+  storage-data:
+  postgresql-data:
+  mariadb-data:
+  mysql-data:
+  sqlserver-data:
+  redis-data:

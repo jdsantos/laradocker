@@ -2,9 +2,6 @@ FROM php:8.3-fpm-alpine
 
 LABEL org.opencontainers.image.authors="https://jdsantos.github.io"
 
-# Set production to true
-ENV PRODUCTION=1 
-
 # Set working directory
 WORKDIR /opt/laravel
 
@@ -12,8 +9,12 @@ WORKDIR /opt/laravel
 RUN apk --no-cache add \
     nginx \
     supervisor \
-    npm \
-    && docker-php-ext-enable opcache
+    npm
+
+# Enable opcache extension
+RUN docker-php-ext-enable opcache
+
+# {DATABASES} - Section to include all needed database dependencies
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -38,16 +39,15 @@ COPY . /opt/laravel
 RUN chown -R www-data:www-data /opt/laravel \
     && chmod -R 755 /opt/laravel/storage
 
-# ::: Scheduler setup ::: 
+# ::: Scheduler setup :::
 
 # Create a log file
 RUN touch /var/log/cron.log
 
 # Add cron job directly to crontab
 RUN echo "* * * * * /usr/local/bin/php /opt/laravel/artisan schedule:run >> /var/log/cron.log 2>&1" | crontab -
-    
-# ::: --- ::: 
 
+# ::: --- :::
 
 # Expose ports
 EXPOSE 80
@@ -56,10 +56,13 @@ EXPOSE 80
 VOLUME /opt/laravel/storage
 
 # Define a health check
-HEALTHCHECK --interval=30s --timeout=15s --start-period=15s --retries=3 CMD curl -f http://127.0.0.1/ || exit 1
+HEALTHCHECK --interval=30s --timeout=15s --start-period=15s --retries=3 CMD curl -f http://localhost/up || exit 1
 
 # Add up the entrypoint
 ADD entrypoint.sh /root/entrypoint.sh
+
+# Ensure the entrypoint script has executable permissions
+RUN chmod +x /root/entrypoint.sh
 
 # ... and declare it as the entrypoint
 ENTRYPOINT ["/root/entrypoint.sh"]

@@ -33,7 +33,7 @@ class ConcreteStubProcessor implements StubProcessor
             throw new InvalidConfiguration;
         }
 
-        $stub = self::STUBS_BASE_PATH.'/Dockerfile.stub';
+        $stubPath = self::STUBS_BASE_PATH.'/Dockerfile.stub';
 
         // Include databases installation steps
         $databases = $this->configurator->getDatabasesToSupport();
@@ -49,7 +49,7 @@ class ConcreteStubProcessor implements StubProcessor
 
         $mergedDbStubContent = implode("\n\n", $dbStubsContent);
 
-        $dockerfileContent = $this->replaceLineWithWordInFile($stub, '{DATABASES}', $mergedDbStubContent);
+        $dockerfileContent = $this->replaceLineWithWordInFile($stubPath, '{DATABASES}', $mergedDbStubContent);
 
         file_put_contents(self::STUBS_BASE_PATH.'/Dockerfile', $dockerfileContent);
     }

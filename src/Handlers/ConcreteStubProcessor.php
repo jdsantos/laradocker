@@ -41,8 +41,10 @@ class ConcreteStubProcessor implements StubProcessor
         $dbStubsContent = [];
 
         foreach ($databases as $database) {
-            $dbStub = self::STUBS_BASE_PATH."/databases/$database.stub";
-            $dbStubsContent[] = File::get($dbStub);
+            $dbStubPath = self::STUBS_BASE_PATH."/databases/$database.stub";
+            if (File::exists($dbStubPath)) {
+                $dbStubsContent[] = File::get($dbStubPath);
+            }
         }
 
         $mergedDbStubContent = implode("\n\n", $dbStubsContent);

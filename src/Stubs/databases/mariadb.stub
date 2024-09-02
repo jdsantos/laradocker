@@ -1,0 +1,2 @@
+# Install PHP extensions for MariaDB
+RUN apk --no-cache add mariadb-client && docker-php-ext-install pdo pdo_mysql

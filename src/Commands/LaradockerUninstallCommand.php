@@ -4,6 +4,7 @@ namespace Jdsantos\Laradocker\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
+use Jdsantos\Laradocker\Contracts\StubProcessor;
 
 class LaradockerUninstallCommand extends Command
 {
@@ -21,6 +22,11 @@ class LaradockerUninstallCommand extends Command
      */
     protected $description = 'Uninstall any files created by laradocker';
 
+    public function __construct(private StubProcessor $processor)
+    {
+        parent::__construct();
+    }
+
     /**
      * Execute the console command.
      *
@@ -28,32 +34,38 @@ class LaradockerUninstallCommand extends Command
      */
     public function handle()
     {
-        $this->deleteExistingConfigurations();
-    }
-
-    /**
-     * Deletes any created files by this app
-     */
-    private function deleteExistingConfigurations(): void
-    {
         $projectBasePath = $this->laravel->basePath();
-
-        $filesToDelete = ["$projectBasePath/conf.d", "$projectBasePath/Dockerfile", "$projectBasePath/.dockerignore", "$projectBasePath/entrypoint.sh"];
+        $filesToDelete = $this->processor->getStubFiles();
+        $filesToDelete = array_map(function ($file) use ($projectBasePath) {
+            return "$projectBasePath/$file";
+        }, $filesToDelete);
 
         $this->line('');
         $this->line('The following files will be deleted:');
         $this->line('');
+
         foreach ($filesToDelete as $fileToDelete) {
-            if (File::exists($fileToDelete)) {
-                if (File::isDirectory($fileToDelete)) {
-                    File::deleteDirectory($fileToDelete);
-                } else {
-                    File::delete($fileToDelete);
-                }
-            }
             $this->line("<options=bold;fg=red> • $fileToDelete</>");
         }
-        $this->line('');
-        $this->line('<options=bold;fg=green>Uninstalled successfully.</>');
+
+        if ($this->confirm(question: 'The following files will be deleted from your project folder. Do you wish to continue?', default: true)) {
+            foreach ($filesToDelete as $fileToDelete) {
+                if (File::exists($fileToDelete)) {
+                    if (File::isDirectory($fileToDelete)) {
+                        File::deleteDirectory($fileToDelete);
+                    } else {
+                        File::delete($fileToDelete);
+                    }
+                }
+                $this->line("<options=bold;fg=red> • $fileToDelete</>");
+            }
+            $this->line('');
+            $this->line('<options=bold;fg=green>Uninstalled successfully.</>');
+            $this->line('');
+        } else {
+            $this->line('');
+            $this->error('Canceled. No files were deleted.');
+            $this->line('');
+        }
     }
 }

@@ -12,7 +12,7 @@
 
 `jdsantos/laradocker` A Laravel package to seamlessly integrate Docker into your application. It provides an easy way to set up Docker for your Laravel project with minimal configuration.
 
-## Prerequisites
+### Prerequisites
 
 Ensure you have PHP (8.2+), Composer and Docker installed on your machine before proceeding. This package requires also that you run it inside a Laravel 11+ project:
 
@@ -21,7 +21,7 @@ Ensure you have PHP (8.2+), Composer and Docker installed on your machine before
 - [PHP 8.2+](https://php.net/downloads)
 - [Composer](https://getcomposer.org/download)
 
-## 🚀 Installation & Usage
+### 🚀 Installation & Usage
 
 Inside your Laravel project folder, simply run the following commands:
 
@@ -38,7 +38,7 @@ Inside your Laravel project folder, simply run the following commands:
    `docker run -p 80:80 -v laravel_storage:/opt/laravel/storage --rm -it $(docker build -q .)`
 
 
-## 🛢 Databases support
+### 🛢 Databases support
 
 Laradocker currently supports the following databases:
 

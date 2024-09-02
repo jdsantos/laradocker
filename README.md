@@ -43,7 +43,7 @@ Inside your Laravel project folder, simply run the following commands:
 Laradocker currently supports the following databases:
 
  Database  | Version |  Status
-:---------|:----------:|----------:
+:---------|:----------:|:----------:
 SQLite            | 3.26.0+   |  ✅        
 Mysql             | 5.7+      |  ✅     
 MariaDB           | 10.3+     |  ✅    

@@ -5,7 +5,6 @@ namespace Jdsantos\Laradocker\Handlers;
 use Illuminate\Support\Facades\File;
 use Jdsantos\Laradocker\Contracts\StubConfigurator;
 use Jdsantos\Laradocker\Contracts\StubProcessor;
-use Jdsantos\Laradocker\Exceptions\InvalidConfiguration;
 use Jdsantos\Laradocker\Helpers\StubFileHelper;
 
 class ConcreteStubProcessor implements StubProcessor
@@ -31,15 +30,9 @@ class ConcreteStubProcessor implements StubProcessor
      * Executes the processor of stubs and handles files to be generated from templates
      *
      * @return array
-     *
-     * @throws InvalidConfiguration
      */
     public function process(): void
     {
-        if (is_null($this->configurator)) {
-            throw new InvalidConfiguration;
-        }
-
         $stubPath = self::STUBS_BASE_PATH.'/Dockerfile.stub';
 
         // Include databases installation steps

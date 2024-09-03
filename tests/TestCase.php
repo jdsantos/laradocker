@@ -5,6 +5,7 @@ namespace Jdsantos\Laradocker\Tests;
 use Illuminate\Support\Facades\File;
 use Jdsantos\Laradocker\Providers\LaradockerServiceProvider;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class TestCase extends OrchestraTestCase
 {
@@ -29,6 +30,7 @@ class TestCase extends OrchestraTestCase
         ];
     }
 
+    #[Test]
     protected function assertFilesExist(array $files): void
     {
         foreach ($files as $file) {
@@ -41,6 +43,7 @@ class TestCase extends OrchestraTestCase
         }
     }
 
+    #[Test]
     protected function assertFilesDoNotExist(array $files): void
     {
         foreach ($files as $file) {

@@ -36,9 +36,6 @@ class LaradockerUninstallCommand extends Command
     {
         $projectBasePath = $this->laravel->basePath();
         $filesToDelete = $this->processor->getStubFiles();
-        $filesToDelete = array_map(function ($file) use ($projectBasePath) {
-            return "$projectBasePath/$file";
-        }, $filesToDelete);
 
         $this->line('');
         $this->line('The following files will be deleted:');
@@ -50,11 +47,12 @@ class LaradockerUninstallCommand extends Command
 
         if ($this->confirm(question: 'The following files will be deleted from your project folder. Do you wish to continue?', default: true)) {
             foreach ($filesToDelete as $fileToDelete) {
-                if (File::exists($fileToDelete)) {
-                    if (File::isDirectory($fileToDelete)) {
-                        File::deleteDirectory($fileToDelete);
+                $filePath = "$projectBasePath/$fileToDelete";
+                if (File::exists($filePath)) {
+                    if (File::isDirectory($filePath)) {
+                        File::deleteDirectory($filePath);
                     } else {
-                        File::delete($fileToDelete);
+                        File::delete($filePath);
                     }
                 }
                 $this->line("<options=bold;fg=red> • $fileToDelete</>");

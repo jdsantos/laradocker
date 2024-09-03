@@ -29,7 +29,7 @@ class LaradockerInstallCommandTest extends TestCase
     }
 
     #[Test]
-    public function it_can_install_without_additional_databases()
+    public function it_can_install_without_additional_databases(): void
     {
         $this->runInstallationWithConfirmation(false);
 
@@ -39,7 +39,7 @@ class LaradockerInstallCommandTest extends TestCase
     }
 
     #[Test]
-    public function it_can_install_with_sqlite_support()
+    public function it_can_install_with_sqlite_support(): void
     {
         $this->artisan('laradocker:install')
             ->expectsConfirmation('Do you want your image support to (more) databases?', 'yes')
@@ -54,7 +54,7 @@ class LaradockerInstallCommandTest extends TestCase
     }
 
     #[Test]
-    public function it_doesnt_install_without_confirmation()
+    public function it_doesnt_install_without_confirmation(): void
     {
         $this->artisan('laradocker:install')
             ->expectsConfirmation('Do you want your image support to (more) databases?', 'no')
@@ -67,7 +67,7 @@ class LaradockerInstallCommandTest extends TestCase
     }
 
     #[Test]
-    protected function runInstallationWithConfirmation(bool $supportDatabases)
+    protected function runInstallationWithConfirmation(bool $supportDatabases): void
     {
         $this->artisan('laradocker:install')
             ->expectsConfirmation('Do you want your image support to (more) databases?', $supportDatabases ? 'yes' : 'no')

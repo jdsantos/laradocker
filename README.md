@@ -37,6 +37,10 @@ Inside your Laravel project folder, simply run the following commands:
 
    `docker run -p 80:80 -v laravel_storage:/opt/laravel/storage --rm -it $(docker build -q .)`
 
+It works also if you're using [Podman](https://podman.io)
+
+   `podman run -p 80:80 -v laravel_storage:/opt/laravel/storage --rm -it $(podman build -q .)`
+
 
 ### 🛢 Databases support
 

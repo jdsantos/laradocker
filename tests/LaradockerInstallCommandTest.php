@@ -39,7 +39,7 @@ class LaradockerInstallCommandTest extends TestCase
 
         $this->assert_files_exist($this->files);
 
-        $this->assert_directory_exists($this->laravelPath.'/conf.d');
+        $this->assertDirectoryExists($this->laravelPath.'/conf.d');
     }
 
     #[Test]
@@ -52,9 +52,9 @@ class LaradockerInstallCommandTest extends TestCase
             ->expectsConfirmation('Laradocker will now generate and create all necessary files inside your project. Do you wish to continue?', 'yes')
             ->run();
 
-        $this->assert_files_exiist($this->files);
+        $this->assert_files_exist($this->files);
 
-        $this->assert_directory_exists($this->laravelPath.'/conf.d');
+        $this->assertDirectoryExists($this->laravelPath.'/conf.d');
     }
 
     #[Test]
@@ -67,7 +67,7 @@ class LaradockerInstallCommandTest extends TestCase
         // Run cleanup
         $this->processor->cleanup();
 
-        $this->assert_file_does_not_exist(__DIR__.'/../src/Stubs/Dockerfile');
+        $this->assertFileDoesNotExist(__DIR__.'/../src/Stubs/Dockerfile');
     }
 
     #[Test]
@@ -106,7 +106,7 @@ class LaradockerInstallCommandTest extends TestCase
 
         $this->assert_files_do_not_exist($this->files);
 
-        $this->assert_directory_does_not_exist($this->laravelPath.'/conf.d');
+        $this->assertDirectoryDoesNotExist($this->laravelPath.'/conf.d');
     }
 
     #[Test]
@@ -124,7 +124,7 @@ class LaradockerInstallCommandTest extends TestCase
         $processor->process();
 
         // Assert that Dockerfile is created without database stubs
-        $this->assert_file_exists(ConcreteStubProcessor::STUBS_BASE_PATH.'/Dockerfile');
+        $this->assertFileExists(ConcreteStubProcessor::STUBS_BASE_PATH.'/Dockerfile');
     }
 
     #[Test]

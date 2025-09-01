@@ -178,7 +178,7 @@ class LaradockerInstallCommandTest extends TestCase
     }
 
     #[Test]
-    protected function runInstallationWithConfirmation(bool $supportDatabases): void
+    protected function run_installation_with_confirmation(bool $supportDatabases): void
     {
         $this->artisan('laradocker:install')
             ->expectsConfirmation('Do you want your image support to (more) databases?', $supportDatabases ? 'yes' : 'no')

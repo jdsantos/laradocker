@@ -147,7 +147,7 @@ class LaradockerInstallCommandTest extends TestCase
         $processor->process();
 
         // Assert that Dockerfile is created without database stubs
-        $this->assert_file_exists(ConcreteStubProcessor::STUBS_BASE_PATH.'/Dockerfile');
+        $this->assertFileExists(ConcreteStubProcessor::STUBS_BASE_PATH.'/Dockerfile');
     }
 
     #[Test]

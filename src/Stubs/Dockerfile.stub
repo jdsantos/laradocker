@@ -2,7 +2,7 @@ FROM php:8.3-fpm-alpine
 
 LABEL org.opencontainers.image.authors="https://jdsantos.github.io"
 
-LABEL laradocker.version="1.1.0"
+LABEL laradocker.version="2.0.0"
 
 # Set working directory
 WORKDIR /opt/laravel

@@ -23,7 +23,7 @@
     "require-dev": {
         "orchestra/testbench": "^10.0",
         "laravel/pint": "^1.17",
-        "larastan/larastan": "^2.9"
+        "larastan/larastan": "^3.0"
     },
     "extra": {
         "laravel": {

@@ -37,7 +37,7 @@ class LaradockerUninstallCommandTest extends TestCase
             ->expectsConfirmation('The following files will be deleted from your project folder. Do you wish to continue?', 'yes')
             ->run();
 
-        $this->assertFilesDoNotExist($this->files);
+        $this->assert_files_do_not_exist($this->files);
     }
 
     #[Test]

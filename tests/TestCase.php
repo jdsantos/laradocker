@@ -31,7 +31,7 @@ class TestCase extends OrchestraTestCase
     }
 
     #[Test]
-    protected function assertFilesExist(array $files): void
+    protected function assert_files_exist(array $files): void
     {
         foreach ($files as $file) {
             $path = $this->laravelPath."/$file";
@@ -44,7 +44,7 @@ class TestCase extends OrchestraTestCase
     }
 
     #[Test]
-    protected function assertFilesDoNotExist(array $files): void
+    protected function assert_files_do_not_exist(array $files): void
     {
         foreach ($files as $file) {
             $path = $this->laravelPath."/$file";

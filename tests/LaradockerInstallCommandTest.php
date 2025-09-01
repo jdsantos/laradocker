@@ -35,9 +35,9 @@ class LaradockerInstallCommandTest extends TestCase
     #[Test]
     public function it_can_install_without_additional_databases(): void
     {
-        $this->runInstallationWithConfirmation(false);
+        $this->run_installation_with_confirmation(false);
 
-        $this->assertFilesExist($this->files);
+        $this->assert_files_exist($this->files);
 
         $this->assertDirectoryExists($this->laravelPath.'/conf.d');
     }
@@ -52,7 +52,7 @@ class LaradockerInstallCommandTest extends TestCase
             ->expectsConfirmation('Laradocker will now generate and create all necessary files inside your project. Do you wish to continue?', 'yes')
             ->run();
 
-        $this->assertFilesExist($this->files);
+        $this->assert_files_exist($this->files);
 
         $this->assertDirectoryExists($this->laravelPath.'/conf.d');
     }
@@ -104,7 +104,7 @@ class LaradockerInstallCommandTest extends TestCase
             ->expectsConfirmation('Laradocker will now generate and create all necessary files inside your project. Do you wish to continue?', 'no')
             ->run();
 
-        $this->assertFilesDoNotExist($this->files);
+        $this->assert_files_do_not_exist($this->files);
 
         $this->assertDirectoryDoesNotExist($this->laravelPath.'/conf.d');
     }

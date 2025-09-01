@@ -14,11 +14,11 @@
 
 ### Prerequisites
 
-Ensure you have PHP (8.2+), Composer and Docker installed on your machine before proceeding. This package requires also that you run it inside a Laravel 11+ project:
+Ensure you have PHP (8.3+), Composer and Docker installed on your machine before proceeding. This package requires also that you run it inside a Laravel 12+ project:
 
-- [Laravel 11+](https://getcomposer.org/download)
+- [Laravel 12+](https://getcomposer.org/download)
 - [Docker](https://docs.docker.com/get-docker/)
-- [PHP 8.2+](https://php.net/downloads)
+- [PHP 8.3+](https://php.net/downloads)
 - [Composer](https://getcomposer.org/download)
 
 ### 🚀 Installation & Usage
@@ -72,3 +72,4 @@ Please, fork this repository, make any changes and submit a Pull Request and we 
 The easiest way to seek support is by submiting an issue on this repo.
 
 ---
+

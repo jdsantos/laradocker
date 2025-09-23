@@ -52,7 +52,7 @@ SQLite            | 3.26.0+   |  ✅
 Mysql             | 5.7+      |  ✅     
 MariaDB           | 10.3+     |  ✅    
 PostgreSQL        | 10.0+     |  ✅  
-SQLServer         | -         | ❌
+SQLServer         | 2017+     |  ✅
 
 
 ### Contributing
@@ -62,10 +62,10 @@ Please, fork this repository, make any changes and submit a Pull Request and we 
 
 ### Contributors
 
-| <a href="http://jdsantos.github.io" target="_blank">**Jorge Santos**</a>
-|:---:|
-| [![jdsantos](https://avatars1.githubusercontent.com/u/1708961?v=3&s=50)](http://jdsantos.github.io)    | 
-| <a href="https://github.com/jdsantos" target="_blank">`github.com/jdsantos`</a>
+| <a href="https://jdsantos.github.io" target="_blank">**Jorge Santos**</a> | <a href="https://walissonaguirra.github.io" target="_blank">**Walisson Aguirra**</a> |
+|:---:|:---:|
+| [![jdsantos](https://avatars1.githubusercontent.com/u/1708961?v=3&s=50)](http://jdsantos.github.io) | [![walissonaguirra](https://avatars.githubusercontent.com/u/53498071?v=4&s=50)](https://github.com/walissonaguirra) |
+| <a href="https://github.com/jdsantos" target="_blank">`github.com/jdsantos`</a> | <a href="https://github.com/walissonaguirra" target="_blank">`github.com/walissonaguirra`</a> |
 
 ### Support
 

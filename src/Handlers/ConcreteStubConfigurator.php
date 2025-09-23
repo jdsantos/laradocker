@@ -15,6 +15,7 @@ class ConcreteStubConfigurator implements StubConfigurator
         'mysql',
         'mariadb',
         'pgsql',
+        'mssql',
     ];
 
     /**

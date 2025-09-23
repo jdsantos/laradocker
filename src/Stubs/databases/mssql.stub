@@ -1,0 +1,19 @@
+# Instalar extensões PHP para SQL Server
+RUN set -ex; \
+    apk --no-cache add \
+        unixodbc-dev \
+        curl \
+        $PHPIZE_DEPS \
+    ; \
+    \
+    # Baixa e instala o driver ODBC da Microsoft para SQL Server
+    curl -fsSL https://download.microsoft.com/download/3/5/5/355d7943-a338-41a7-858d-53b259ea33f5/msodbcsql18_18.3.3.1-1_amd64.apk -o /tmp/msodbcsql18.apk; \
+    apk add --allow-untrusted /tmp/msodbcsql18.apk; \
+    \
+    # Instalar extensões PHP sqlsrv e pdo_sqlsrv via PECL
+    pecl install sqlsrv pdo_sqlsrv; \
+    \
+    # Habilitar as extensões
+    docker-php-ext-enable sqlsrv pdo_sqlsrv; \
+    \
+    rm -rf /tmp/*;
